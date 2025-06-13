@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-
+import "./ToggleStyles.css";
 // stateless functional component:component nhưng không sử dụng state
 //stateful functional component:component có sử dụng state
 // function Toggle(){
@@ -21,8 +21,14 @@ function Toggle() {
   const [on, setOn] = useState(false);
   console.log(on);
   return (
-    <div className="toggle" onClick={() => setOn(true)}>
-      Toggle {on ? "On" : "Off"}
+    <div>
+      <div className={`toggle ${on ? "active" : ""}`}>
+        <div className={`spinner ${on ? "active" : ""}`}></div>
+      </div>
+      <div className="toggle-control">
+        <div className="toggle-on" onClick={()=>setOn(true)}>On</div>
+        <div className="toggle-off"onClick={()=>setOn(false)}>Off</div>
+      </div>
     </div>
   );
 }
