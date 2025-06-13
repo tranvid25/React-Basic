@@ -1,4 +1,4 @@
-const YoutubeData = [
+export const YoutubeData = [
   {
     id: 1,
     title: "this is example of title",
