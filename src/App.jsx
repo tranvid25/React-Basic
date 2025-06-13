@@ -4,11 +4,11 @@ import "./App.css";
 function App() {
   return (
     <div className="youtube-list">
-      {YoutubeData.map((item, index) => (
+      {YoutubeData.map((item) => (
         <YoutubeItem
           key={item.id}
           image={item.image}
-          avatar={item.avatar}
+          avatar={item.avatar || item.image}
           title={item.title}
           author={item.author}
         ></YoutubeItem>
