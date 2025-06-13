@@ -1,4 +1,4 @@
-import React,{useState} from 'react';
+import React, { useState } from "react";
 
 // stateless functional component:component nhưng không sử dụng state
 //stateful functional component:component có sử dụng state
@@ -12,17 +12,18 @@ import React,{useState} from 'react';
 //         </div>
 //     )
 // }//statefull
-function Toggle(){
-    //1.enabling state:useState(initialize value)
-    //2.initialize state:useState(false)
-    //3.reading state:
-    //4.update state
-    const array=useState(false);
-    console.log(array);
-    const [a,b]=[1,2];
-    console.log(a,b);
-    const [on,setOn]=useState(false);
-    console.log(on,setOn);
-    return <div className="toggle"></div>;
+function Toggle() {
+  //1.enabling state:useState(initialize value)
+  //2.initialize state:useState(false)
+  //3.reading state:
+  //4.update state
+  //initializ value:boolean(true,false)
+  const [on, setOn] = useState(false);
+  console.log(on);
+  return (
+    <div className="toggle" onClick={() => setOn(true)}>
+      Toggle {on ? "On" : "Off"}
+    </div>
+  );
 }
 export default Toggle;
