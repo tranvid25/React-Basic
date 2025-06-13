@@ -20,9 +20,14 @@ function Toggle() {
   //initializ value:boolean(true,false)
   const [on, setOn] = useState(false);
   console.log(on);
+  const handleToggle=()=>{
+   setOn((on) =>{
+    return !on;
+   })
+  }
   return (
     <div>
-      <div className={`toggle ${on ? "active" : ""}`}>
+      <div className={`toggle ${on ? "active" : ""}`} onClick={handleToggle}>
         <div className={`spinner ${on ? "active" : ""}`}></div>
       </div>
       <div className="toggle-control">
