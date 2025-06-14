@@ -1,11 +1,12 @@
 import "./App.css";
 import Toggle from "./components/state/Toggle";
-
+import Counter from "./components/counter/Counter";
+import Game from "./components/tictactoe/game";
 
 function App() {
   return (
     <div>
-      <Toggle></Toggle>
+      <Game></Game>
     </div>
   );
 }
