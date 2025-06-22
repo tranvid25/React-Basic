@@ -2,11 +2,21 @@ import "./App.css";
 import Toggle from "./components/state/Toggle";
 import Counter from "./components/counter/Counter";
 import Game from "./components/tictactoe/game";
+import Button from "./components/button/Button";
+import Card from "./components/card/Card";
+import Cardlist from "./components/card/Cardlist";
 
 function App() {
   return (
     <div>
-      <Game></Game>
+      <Cardlist>
+        <Card></Card>
+        <Card></Card>
+        <Card></Card>
+        <Card></Card>
+        <Card></Card>
+        <Card></Card>
+      </Cardlist>
     </div>
   );
 }
