@@ -5,10 +5,12 @@ import Game from "./components/tictactoe/game";
 import Button from "./components/button/Button";
 import Card from "./components/card/Card";
 import Cardlist from "./components/card/Cardlist";
+import { GlobalStyles } from "./GlobalStyles";
 
 function App() {
   return (
     <div>
+      <GlobalStyles></GlobalStyles>
       <Cardlist>
         <Card></Card>
         <Card></Card>
