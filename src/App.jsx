@@ -17,7 +17,7 @@ import Photo from "./components/photo/Photo";
 function App() {
   return (
     <div>
-     <Photo></Photo>
+     <Counter></Counter>
     </div>
   );
 }
