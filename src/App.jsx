@@ -6,6 +6,7 @@ import Button from "./components/button/Button";
 import Card from "./components/card/Card";
 import Cardlist from "./components/card/Cardlist";
 import CardTailwind from "./components/card/CardTailwind";
+import Photo from "./components/photo/Photo";
 // import { GlobalStyles } from "./GlobalStyles";
 // import { ThemeProvider } from "styled-components";
 // const theme = {
@@ -16,9 +17,7 @@ import CardTailwind from "./components/card/CardTailwind";
 function App() {
   return (
     <div>
-      <Cardlist>
-        <CardTailwind></CardTailwind>
-      </Cardlist>
+     <Photo></Photo>
     </div>
   );
 }
