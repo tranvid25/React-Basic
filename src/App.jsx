@@ -7,6 +7,8 @@ import Card from "./components/card/Card";
 import Cardlist from "./components/card/Cardlist";
 import CardTailwind from "./components/card/CardTailwind";
 import Photo from "./components/photo/Photo";
+import Timer from "./Timer";
+import Header from "./Header";
 // import { GlobalStyles } from "./GlobalStyles";
 // import { ThemeProvider } from "styled-components";
 // const theme = {
@@ -17,7 +19,7 @@ import Photo from "./components/photo/Photo";
 function App() {
   return (
     <div>
-     <Counter></Counter>
+     <Header></Header>
     </div>
   );
 }
