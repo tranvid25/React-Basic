@@ -66,11 +66,10 @@ const CardAmount = styled.span`
   color: transparent;
   -webkit-background-clip: text;
 `;
-
-const Card = () => {
+const CardTailwind = () => {
   return (
     <div className="relative">
-      <div className="card-image">
+      <div className="w-full rounded-lg h-[200px]">
         <img
           src="https://plus.unsplash.com/premium_photo-1721076216277-22de7111cd06?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxmZWF0dXJlZC1waG90b3MtZmVlZHw3fHx8ZW58MHx8fHx8"
           alt=""
@@ -96,4 +95,4 @@ const Card = () => {
   );
 };
 
-export default Card;
+export default CardTailwind;

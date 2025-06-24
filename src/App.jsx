@@ -5,19 +5,19 @@ import Game from "./components/tictactoe/game";
 import Button from "./components/button/Button";
 import Card from "./components/card/Card";
 import Cardlist from "./components/card/Cardlist";
-import { GlobalStyles } from "./GlobalStyles";
-
+import CardTailwind from "./components/card/CardTailwind";
+// import { GlobalStyles } from "./GlobalStyles";
+// import { ThemeProvider } from "styled-components";
+// const theme = {
+//   colors: {
+//     blue: "#2979ff",
+//   },
+// };
 function App() {
   return (
     <div>
-      <GlobalStyles></GlobalStyles>
       <Cardlist>
-        <Card></Card>
-        <Card></Card>
-        <Card></Card>
-        <Card></Card>
-        <Card></Card>
-        <Card></Card>
+        <CardTailwind></CardTailwind>
       </Cardlist>
     </div>
   );
