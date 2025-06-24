@@ -9,6 +9,7 @@ import CardTailwind from "./components/card/CardTailwind";
 import Photo from "./components/photo/Photo";
 import Timer from "./Timer";
 import Header from "./Header";
+import HackerNew from "./components/news/HackerNew";
 // import { GlobalStyles } from "./GlobalStyles";
 // import { ThemeProvider } from "styled-components";
 // const theme = {
@@ -19,7 +20,7 @@ import Header from "./Header";
 function App() {
   return (
     <div>
-     <Header></Header>
+     <HackerNew></HackerNew>
     </div>
   );
 }
