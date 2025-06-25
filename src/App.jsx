@@ -10,6 +10,8 @@ import Photo from "./components/photo/Photo";
 import Timer from "./Timer";
 import Header from "./Header";
 import HackerNew from "./components/news/HackerNew";
+import HackerReducer from "./components/news/HackerReducer";
+import { useRef } from "react";
 // import { GlobalStyles } from "./GlobalStyles";
 // import { ThemeProvider } from "styled-components";
 // const theme = {
@@ -18,9 +20,17 @@ import HackerNew from "./components/news/HackerNew";
 //   },
 // };
 function App() {
+  const countRef=useRef(0);
+  //truy xuất giá trị Ref
+  console.log(countRef.current);
+  const handler=()=>{
+    //update giá trị
+    countRef.current=10;
+  }
   return (
     <div>
-     <HackerNew></HackerNew>
+     {/* <HackerReducer></HackerReducer> */}
+
     </div>
   );
 }
