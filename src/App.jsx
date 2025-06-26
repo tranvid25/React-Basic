@@ -11,8 +11,9 @@ import Timer from "./Timer";
 import Header from "./Header";
 import HackerNew from "./components/news/HackerNew";
 import HackerReducer from "./components/news/HackerReducer";
-import { useEffect, useRef, useState } from "react";
+// import { useEffect, useRef, useState } from "react";
 import TextArea from "./components/TextArea";
+import Dropdown from "./components/Dropdown";
 // import { GlobalStyles } from "./GlobalStyles";
 // import { ThemeProvider } from "styled-components";
 // const theme = {
@@ -23,8 +24,8 @@ import TextArea from "./components/TextArea";
 function App() {
 
   return (
-    <div>
-      <TextArea></TextArea>
+    <div className="p-5">
+     <Dropdown></Dropdown>
     </div>
   );
 }
