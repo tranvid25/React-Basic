@@ -1,0 +1,57 @@
+import React from "react";
+import useLinkNewTab from "../hooks/useLinkNewTab";
+
+const Blog = () => {
+    const {contentRef}=useLinkNewTab();
+  return (
+    <div className="entry-content" ref={contentRef}>
+      <p className="mb-5">
+        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Esse sapiente
+        nobis reiciendis nisi nostrum suscipit fugiat, quidem non veniam quasi
+        unde deleniti sit praesentium fuga et a recusandae pariatur totam.
+        <a href="https://www.instagram.com/" className="underline">
+          google.com
+        </a>
+        ?
+      </p>
+      <p className="mb-5">
+        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Esse sapiente
+        nobis reiciendis nisi nostrum suscipit fugiat, quidem non veniam quasi
+        unde deleniti sit praesentium fuga et a recusandae pariatur totam.
+        <a href="https://www.instagram.com/" className="underline">
+          google.com
+        </a>
+        ?
+      </p>
+      <p className="mb-5">
+        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Esse sapiente
+        nobis reiciendis nisi nostrum suscipit fugiat, quidem non veniam quasi
+        unde deleniti sit praesentium fuga et a recusandae pariatur totam.
+        <a href="https://www.instagram.com/" className="underline">
+          google.com
+        </a>
+        ?
+      </p>
+      <p className="mb-5">
+        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Esse sapiente
+        nobis reiciendis nisi nostrum suscipit fugiat, quidem non veniam quasi
+        unde deleniti sit praesentium fuga et a recusandae pariatur totam.
+        <a href="https://www.instagram.com/" className="underline">
+          google.com
+        </a>
+        ?
+      </p>
+      <p className="mb-5">
+        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Esse sapiente
+        nobis reiciendis nisi nostrum suscipit fugiat, quidem non veniam quasi
+        unde deleniti sit praesentium fuga et a recusandae pariatur totam.
+        <a href="https://www.instagram.com/" className="underline">
+          google.com
+        </a>
+        ?
+      </p>
+    </div>
+  );
+};
+
+export default Blog;
