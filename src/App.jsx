@@ -14,6 +14,7 @@ import HackerReducer from "./components/news/HackerReducer";
 // import { useEffect, useRef, useState } from "react";
 import TextArea from "./components/TextArea";
 import Dropdown from "./components/Dropdown";
+import Blog from "./components/Blog";
 // import { GlobalStyles } from "./GlobalStyles";
 // import { ThemeProvider } from "styled-components";
 // const theme = {
@@ -22,10 +23,10 @@ import Dropdown from "./components/Dropdown";
 //   },
 // };
 function App() {
-
   return (
     <div className="p-5">
-     <Dropdown></Dropdown>
+      <Dropdown></Dropdown>
+      <Blog></Blog>
     </div>
   );
 }

@@ -1,15 +1,17 @@
 import React from "react";
 import useLinkNewTab from "../hooks/useLinkNewTab";
+import useHover from "../hooks/useHover";
 
 const Blog = () => {
     const {contentRef}=useLinkNewTab();
+    const {hovered,nodeRef}=useHover();
   return (
     <div className="entry-content" ref={contentRef}>
       <p className="mb-5">
         Lorem ipsum, dolor sit amet consectetur adipisicing elit. Esse sapiente
         nobis reiciendis nisi nostrum suscipit fugiat, quidem non veniam quasi
         unde deleniti sit praesentium fuga et a recusandae pariatur totam.
-        <a href="https://www.instagram.com/" className="underline">
+        <a href="https://www.instagram.com/" className={`underline ${hovered ? "text-green-400" : ""}`} ref={nodeRef}>
           google.com
         </a>
         ?
