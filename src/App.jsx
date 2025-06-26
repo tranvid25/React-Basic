@@ -15,6 +15,7 @@ import HackerReducer from "./components/news/HackerReducer";
 import TextArea from "./components/TextArea";
 import Dropdown from "./components/Dropdown";
 import Blog from "./components/Blog";
+import { useState } from "react";
 // import { GlobalStyles } from "./GlobalStyles";
 // import { ThemeProvider } from "styled-components";
 // const theme = {
@@ -23,10 +24,11 @@ import Blog from "./components/Blog";
 //   },
 // };
 function App() {
+  const [show,setShown]=useState(false)
   return (
     <div className="p-5">
-      <Dropdown></Dropdown>
-      <Blog></Blog>
+      <button onClick={()=>setShown(!show)}>Toggle button</button>
+      {(show && <HackerNew></HackerNew>)}
     </div>
   );
 }

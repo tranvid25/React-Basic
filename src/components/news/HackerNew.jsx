@@ -8,6 +8,12 @@ const HackerNew = () => {
   const [errorMessage, setErrorMessage] = useState("");
 
   const handleFakedata = useRef(null);
+  const isMounted = useRef(true);
+  useEffect(() => {
+    return () => {
+      isMounted.current = false;
+    };
+  });
 
   handleFakedata.current = async () => {
     setLoading(true);
@@ -16,7 +22,11 @@ const HackerNew = () => {
       const response = await axios.get(
         `https://hn.algolia.com/api/v1/search?query=${query}`
       );
-      setHits(response.data?.hits || []);
+      if (isMounted.current) {
+        setTimeout(() => {
+          setHits(response.data?.hits || []);
+        });
+      }
     } catch (error) {
       console.log(error);
       setErrorMessage(`Đã xảy ra lỗi: ${error.message}`);
