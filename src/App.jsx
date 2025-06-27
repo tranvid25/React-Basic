@@ -15,7 +15,12 @@ import HackerReducer from "./components/news/HackerReducer";
 import TextArea from "./components/TextArea";
 import Dropdown from "./components/Dropdown";
 import Blog from "./components/Blog";
-import { useState } from "react";
+
+import SideBarMenu from "./components/SideBarMenu";
+
+
+import Input from "./components/form/Input";
+import Form from "./components/form/Form";
 // import { GlobalStyles } from "./GlobalStyles";
 // import { ThemeProvider } from "styled-components";
 // const theme = {
@@ -24,11 +29,9 @@ import { useState } from "react";
 //   },
 // };
 function App() {
-  const [show,setShown]=useState(false)
   return (
-    <div className="p-5">
-      <button onClick={()=>setShown(!show)}>Toggle button</button>
-      {(show && <HackerNew></HackerNew>)}
+    <div>
+      <Form></Form>
     </div>
   );
 }
