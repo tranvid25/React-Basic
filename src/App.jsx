@@ -19,8 +19,8 @@ import Blog from "./components/Blog";
 import SideBarMenu from "./components/SideBarMenu";
 
 
-import Input from "./components/form/Input";
 import Form from "./components/form/Form";
+import MovieSearchApp from "./components/MovieSearchApp";
 // import { GlobalStyles } from "./GlobalStyles";
 // import { ThemeProvider } from "styled-components";
 // const theme = {
@@ -31,7 +31,7 @@ import Form from "./components/form/Form";
 function App() {
   return (
     <div>
-      <Form></Form>
+      <MovieSearchApp></MovieSearchApp>
     </div>
   );
 }
