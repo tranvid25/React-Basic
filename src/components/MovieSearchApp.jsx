@@ -41,7 +41,7 @@ const MovieSearchApp = () => {
       )}
       <div className="grid grid-cols-3 gap-10">
         {movies.length > 0 &&
-          movies.map((item, index) => (
+          movies.map((item) => (
             <MovieItem key={item.id} data={item}></MovieItem>
           ))}
       </div>
