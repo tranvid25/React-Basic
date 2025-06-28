@@ -1,4 +1,5 @@
 import "./App.css";
+import "./index.scss";
 import Toggle from "./components/state/Toggle";
 import Counter from "./components/counter/Counter";
 import Game from "./components/tictactoe/game";
