@@ -1,5 +1,20 @@
 import React from "react";
 import { useFormik } from "formik";
+const validate = (values) => {
+  const errors = {};
+  if (!values.firstName) {
+    errors.firstName = "Requied";
+  } else if (values.firstName.length > 20) {
+    errors.firstName = "Must be 20 character or less";
+  }
+  if (!values.email) {
+    errors.email = "Required";
+  } else if (values.email.length > 10) {
+    errors.email = "Must be 10 or less";
+  }
+  return errors;
+};
+
 const SignUp = () => {
   const formik = useFormik({
     initialValues: {
@@ -7,6 +22,7 @@ const SignUp = () => {
       email: "",
       password: "",
     },
+    validate,
     onSubmit: (values) => {
       console.log(values);
     },
@@ -15,6 +31,7 @@ const SignUp = () => {
     <form
       onSubmit={formik.handleSubmit}
       className="p-10 w-full max-w-[500px] mx-auto"
+      autoComplete="off"
     >
       <div className="flex flex-col gap-2">
         <label htmlFor="firstName">Fistname</label>
@@ -26,7 +43,11 @@ const SignUp = () => {
           className="p-4 rounded-md border border-gray-100"
           value={formik.values.firstName}
           onChange={formik.handleChange}
+          onBlur={formik.handleBlur}
         />
+        { formik.touched.firstName && formik.errors.firstName ? (
+          <div className="text-sm text-red-500">{formik.errors.firstName}</div>
+        ) : null}
         <label htmlFor="email">Email</label>
         <input
           type="text"
@@ -36,7 +57,11 @@ const SignUp = () => {
           className="p-4 rounded-md border border-gray-100"
           value={formik.values.email}
           onChange={formik.handleChange}
+          onBlur={formik.handleBlur}
         />
+        {formik.touched.email && formik.errors.email ? (
+          <div className="text-sm text-red-500">{formik.errors.email}</div>
+        ) : null}
         <label htmlFor="password">password</label>
         <input
           type="password"
@@ -47,7 +72,10 @@ const SignUp = () => {
           onChange={formik.handleChange}
         />
       </div>
-      <button className="w-full p-4 bg-blue-600 text-white font-semibold rounded-lg">
+      <button
+        type="submit"
+        className="w-full p-4 bg-blue-600 text-white font-semibold rounded-lg"
+      >
         Submit
       </button>
     </form>
