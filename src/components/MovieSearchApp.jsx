@@ -1,21 +1,24 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
+import useDebounce from "../hooks/useDebounce";
 //https://api.themoviedb.org/3/search/movie?api_key=bd4a994d57d4e648fd2a696735ed063f&query=''
 const MovieSearchApp = () => {
   const [movies, setMovies] = useState([]);
   const [query,setQuery]=useState("");
-  useEffect(() => {
-    async function fetchdata() {
-      const response = await axios.get(
-        `https://api.themoviedb.org/3/search/movie?api_key=bd4a994d57d4e648fd2a696735ed063f&query='${query}'`
-      );
-      console.log(response.data);
-      if (response.data.results) {
+  const querydebounce=useDebounce(query,500);
+  const [loading,setLoading]=useState(true);
+  useEffect(()=> {
+    
+   async function fetchdata(){
+    setLoading(true);
+    const response=await axios.get(`https://api.themoviedb.org/3/search/movie?api_key=bd4a994d57d4e648fd2a696735ed063f&query=${querydebounce}`);
+    if(response.data.results){
         setMovies(response.data.results);
-      }
+        setLoading(false);
     }
-    fetchdata();
-  }, [query]);
+   }
+   fetchdata()
+  },[querydebounce]);
   return (
     <div className="p-10">
       <div className="w-full max-w-[500px] mx-auto mb-20">
@@ -26,6 +29,7 @@ const MovieSearchApp = () => {
           onChange={(e)=>setQuery(e.target.value)}
         />
       </div>
+      {loading && <p>Loading ...</p>}
       <div className="grid grid-cols-3 gap-10">
         {movies.length > 0 &&
           movies.map((item, index) => (
