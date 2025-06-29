@@ -22,6 +22,8 @@ import SideBarMenu from "./components/SideBarMenu";
 import Form from "./components/form/Form";
 import MovieSearchApp from "./components/MovieSearchApp";
 import SignUp from "./components/form/SignUp";
+import SignUpv2 from "./components/form/SignUpv2";
+import SignUpv2Final from "./components/form/SignUpv2Final";
 // import { GlobalStyles } from "./GlobalStyles";
 // import { ThemeProvider } from "styled-components";
 // const theme = {
@@ -33,7 +35,7 @@ function App() {
   return (
     <div>
       {/* <MovieSearchApp></MovieSearchApp> */}
-      <SignUp></SignUp>
+     <SignUpv2Final></SignUpv2Final>
     </div>
   );
 }
