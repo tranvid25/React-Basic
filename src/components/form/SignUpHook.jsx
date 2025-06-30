@@ -2,6 +2,7 @@ import React from "react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
+import axios from "axios";
 
 // ✅ Validation Schema
 const schema = yup.object({
@@ -23,21 +24,19 @@ const SignUpHook = () => {
   const {
     register,
     handleSubmit,
-    formState: { errors, isSubmitting, isValid },
+    formState: { errors, isSubmitting, isValid,isDirty,dirtyFields},
   } = useForm({
     resolver: yupResolver(schema),
     mode: "onChange", // optional: trigger validation on change
   });
 
-  const onSubmit = (values) => {
-    return new Promise((resolve) => {
-      setTimeout(() => {
-        console.log(values);
-        resolve();
-      }, 2000);
-    });
-  };
-
+  const onSubmit = async(values)=>{
+    if(isValid){
+      console.log("send data to backend");
+    }
+    const response= await axios.get("https://hn.algolia.com/api/v1/search?query=react");
+    return response.data;
+  }
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
