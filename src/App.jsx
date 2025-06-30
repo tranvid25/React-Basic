@@ -1,3 +1,4 @@
+import { Fragment, useState } from "react";
 import "./App.css";
 import Formregisterfinal from "./components/form/Formregisterfinal";
 // import Toggle from "./components/state/Toggle";
@@ -19,7 +20,6 @@ import Formregisterfinal from "./components/form/Formregisterfinal";
 
 // import SideBarMenu from "./components/SideBarMenu";
 
-
 // import Form from "./components/form/Form";
 // import MovieSearchApp from "./components/MovieSearchApp";
 // import SignUp from "./components/form/SignUp";
@@ -33,12 +33,22 @@ import SignUpHook from "./components/form/SignUpHook";
 //     blue: "#2979ff",
 //   },
 // };
+
 function App() {
+  const firstName = "firstname";
+  const lastname = "lastName";
+  const [on, setOn] = useState(true);
   return (
-    <div>
-      {/* <MovieSearchApp></MovieSearchApp> */}
-     <Formregisterfinal></Formregisterfinal>
-    </div>
+    <Fragment>
+      <div className="p-2 flex flex-row">
+        {on && (
+          <Fragment>
+            {firstName}
+            {lastname}
+          </Fragment>
+        )}
+      </div>
+    </Fragment>
   );
 }
 
