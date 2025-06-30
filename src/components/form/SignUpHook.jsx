@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { Controller, useForm } from "react-hook-form";
+import { Controller, useController, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import axios from "axios";
@@ -18,12 +18,11 @@ const schema = yup.object({
     .string()
     .required("Please enter your password")
     .min(6, "Password must be at least 6 characters"),
-  age: yup
-    .number()
-    .when("showAge", {
-      is: true,
-      then: (schema) => schema.required("Please enter your age").min(1, "Must be valid"),
-    }),
+  age: yup.number().when("showAge", {
+    is: true,
+    then: (schema) =>
+      schema.required("Please enter your age").min(1, "Must be valid"),
+  }),
 });
 
 const SignUpHook = () => {
@@ -64,7 +63,7 @@ const SignUpHook = () => {
 
   useEffect(() => {
     setFocus("firstName");
-  }, [setFocus]);//focus là khi form đc mở nó sẽ tự động đặt con trỏ vào 
+  }, [setFocus]); //focus là khi form đc mở nó sẽ tự động đặt con trỏ vào
 
   return (
     <form
@@ -88,12 +87,12 @@ const SignUpHook = () => {
 
         {/* Email */}
         <label htmlFor="email">Email</label>
-        <input
+        <MyInput
           type="email"
           id="email"
           placeholder="Enter your email"
-          className="p-4 rounded-md border border-gray-300"
-          {...register("email")}
+          name="email"
+          control={control}
         />
         {errors?.email && (
           <p className="text-red-500 text-sm">{errors.email.message}</p>
@@ -124,7 +123,11 @@ const SignUpHook = () => {
         {watchShowAge && (
           <>
             <label htmlFor="age">Age</label>
-            <MyInput name="age" control={control} placeholder="Enter your age" />
+            <MyInput
+              name="age"
+              control={control}
+              placeholder="Enter your age"
+            />
             {errors?.age && (
               <p className="text-red-500 text-sm">{errors.age.message}</p>
             )}
@@ -149,21 +152,35 @@ const SignUpHook = () => {
 };
 
 // ✅ Custom Input component using Controller
-const MyInput = ({ name, control, placeholder }) => {
+const MyInput = ({ control, ...props }) => {
+  const { field } = useController({
+    control,
+    name: props.name,
+    defaultValue: "",
+  });
   return (
-    <Controller
-      name={name}
-      control={control}
-      render={({ field }) => (
-        <input
-          {...field}
-          type="number"
-          placeholder={placeholder}
-          className="p-4 rounded-md border border-gray-300"
-        />
-      )}
+    <input
+      className="p-4 rounded-md border border-gray-300"
+      {...field}
+      {...props}
     />
   );
 };
+// const MyInput = ({ name, control, placeholder }) => {
+//   return (
+//     <Controller
+//       name={name}
+//       control={control}
+//       render={({ field }) => (
+//         <input
+//           {...field}
+//           type="number"
+//           placeholder={placeholder}
+//           className="p-4 rounded-md border border-gray-300"
+//         />
+//       )}
+//     />
+//   );
+// };
 
 export default SignUpHook;
