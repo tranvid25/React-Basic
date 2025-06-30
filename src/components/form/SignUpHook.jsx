@@ -1,5 +1,5 @@
-import React from "react";
-import { useForm } from "react-hook-form";
+import React, { useEffect } from "react";
+import { Controller, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import axios from "axios";
@@ -18,6 +18,12 @@ const schema = yup.object({
     .string()
     .required("Please enter your password")
     .min(6, "Password must be at least 6 characters"),
+  age: yup
+    .number()
+    .when("showAge", {
+      is: true,
+      then: (schema) => schema.required("Please enter your age").min(1, "Must be valid"),
+    }),
 });
 
 const SignUpHook = () => {
@@ -26,29 +32,40 @@ const SignUpHook = () => {
     handleSubmit,
     watch,
     reset,
-    formState: { errors, isSubmitting, isValid},
+    formState: { errors, isSubmitting, isValid },
+    setFocus,
+    control,
   } = useForm({
     resolver: yupResolver(schema),
-    mode: "onChange", // optional: trigger validation on change
+    mode: "onChange",
   });
+
   const watchShowAge = watch("showAge", false);
+
   const onSubmit = async (values) => {
     if (isValid) {
-      console.log("send data to backend",values);
-      //affter successfully submitted
-      //theem reset form
+      console.log("Send data to backend:", values);
+
+      // Reset form
       reset({
-        firstName:"",
-        lastName:"",
-        email:"",
-        password:""
+        firstName: "",
+        email: "",
+        password: "",
+        showAge: false,
+        age: "",
       });
     }
+
     const response = await axios.get(
       "https://hn.algolia.com/api/v1/search?query=react"
     );
     return response.data;
   };
+
+  useEffect(() => {
+    setFocus("firstName");
+  }, [setFocus]);//focus là khi form đc mở nó sẽ tự động đặt con trỏ vào 
+
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
@@ -63,7 +80,6 @@ const SignUpHook = () => {
           id="firstName"
           placeholder="Enter your first name"
           className="p-4 rounded-md border border-gray-300"
-          defaultValue="Vĩ"
           {...register("firstName")}
         />
         {errors?.firstName && (
@@ -95,18 +111,25 @@ const SignUpHook = () => {
         {errors?.password && (
           <p className="text-red-500 text-sm">{errors.password.message}</p>
         )}
-        <div>
-          <input type="checkbox" {...register("showAge")} />
-          {watchShowAge && (
-            <input
-              type="number"
-              id="age"
-              placeholder="Enter your age"
-              className="p-4 rounded-md border border-gray-300"
-              {...register("age")}
-            />
-          )}
+
+        {/* Show Age Toggle */}
+        <div className="mt-4">
+          <input type="checkbox" id="showAge" {...register("showAge")} />
+          <label htmlFor="showAge" className="ml-2">
+            Show Age
+          </label>
         </div>
+
+        {/* Age input if checked */}
+        {watchShowAge && (
+          <>
+            <label htmlFor="age">Age</label>
+            <MyInput name="age" control={control} placeholder="Enter your age" />
+            {errors?.age && (
+              <p className="text-red-500 text-sm">{errors.age.message}</p>
+            )}
+          </>
+        )}
       </div>
 
       {/* Submit Button */}
@@ -116,12 +139,30 @@ const SignUpHook = () => {
         className="w-full p-4 bg-blue-600 text-white font-semibold rounded-lg mt-4 flex justify-center items-center"
       >
         {isSubmitting ? (
-          <div className=" mx-auto w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+          <div className="mx-auto w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
         ) : (
           "Submit"
         )}
       </button>
     </form>
+  );
+};
+
+// ✅ Custom Input component using Controller
+const MyInput = ({ name, control, placeholder }) => {
+  return (
+    <Controller
+      name={name}
+      control={control}
+      render={({ field }) => (
+        <input
+          {...field}
+          type="number"
+          placeholder={placeholder}
+          className="p-4 rounded-md border border-gray-300"
+        />
+      )}
+    />
   );
 };
 
