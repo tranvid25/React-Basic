@@ -1,5 +1,5 @@
 import React from "react";
-import { Formik, Form, Field, ErrorMessage } from "formik";
+import { Formik, Form, Field, ErrorMessage, useField } from "formik";
 import * as Yup from "yup";
 import PreviousMap_ from "postcss/lib/previous-map";
 
@@ -52,52 +52,25 @@ const SignUpv2Final = () => {
             className="text-red-500 text-sm"
           />
         </div> */}
-        <MyInput label="First name" name="firstName"></MyInput>
-        <div className="flex flex-col gap-2 mb-4">
-          <label htmlFor="email">Email</label>
-          <Field
-            type="text"
-            id="email"
-            name="email"
-            placeholder="Enter your name email...."
-            className="p-4 rounded-md border border-gray-300"
-          />
-          <ErrorMessage
-            name="email"
-            component="div"
-            className="text-red-500 text-sm"
-          />
-        </div>
-        <div className="flex flex-col gap-2 mb-4">
-          <label htmlFor="password">Password</label>
-          <Field
-            type="password"
-            id="password"
-            name="password"
-            placeholder="Enter yout password..."
-            className="p-4 rounded-md border border-gray-300"
-          />
-          <ErrorMessage
-            name="password"
-            component="div"
-            className="text-red-500 text-sm"
-          />
-        </div>
-        <div className="flex flex-col gap-2 mb-4">
-          <label htmlFor="intro">Intro</label>
-          <Field
-            as="textarea"
-            id="intro"
-            name="intro"
-            placeholder="Enter your Intro......"
-            className="p-4 rounded-md border border-gray-300 h-[200px]"
-          />
-          <ErrorMessage
-            name="password"
-            component="div"
-            className="text-red-500 text-sm"
-          />
-        </div>
+        <MyInput
+          label="First name"
+          name="firstName"
+          type="text"
+          placeholder="Enter your first name"
+        />
+        <MyInput
+          label="Email"
+          name="email"
+          type="text"
+          placeholder="Enter your email"
+        />
+        <MyInput
+          label="Password"
+          name="password"
+          type="password"
+          placeholder="Enter your password"
+        />
+
         <div className="flex flex-col gap-2 mb-4">
           <label htmlFor="Select">Select</label>
           <Field
@@ -139,14 +112,21 @@ const SignUpv2Final = () => {
     </Formik>
   );
 };
-const MyInput = (props) => {
+const MyInput = ({ label, ...props }) => {
+  const [field, meta] = useField(props);
   return (
     <div className="flex flex-col gap-2 mb-5">
-      <label htmlFor={props.id || props.name}>{props.label}</label>
-      <input type="text" className="p-4 rounded-md border border-gray-300"/>
-      <div className="text-red-500 text-sm"></div>
+      <label htmlFor={props.id || props.name}>{label}</label>
+      <input
+        {...field}
+        {...props}
+        className="p-4 rounded-md border border-gray-300"
+      />
+      {meta.touched && meta.error ? (
+        <div className="text-red-500 text-sm">{meta.error}</div>
+      ) : null}
     </div>
-  )
+  );
 };
 
 export default SignUpv2Final;
