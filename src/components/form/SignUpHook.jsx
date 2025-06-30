@@ -24,19 +24,22 @@ const SignUpHook = () => {
   const {
     register,
     handleSubmit,
-    formState: { errors, isSubmitting, isValid,isDirty,dirtyFields},
+    watch,
+    formState: { errors, isSubmitting, isValid, isDirty, dirtyFields },
   } = useForm({
     resolver: yupResolver(schema),
     mode: "onChange", // optional: trigger validation on change
   });
-
-  const onSubmit = async(values)=>{
-    if(isValid){
+  const watchShowAge = watch("showAge", false);
+  const onSubmit = async (values) => {
+    if (isValid) {
       console.log("send data to backend");
     }
-    const response= await axios.get("https://hn.algolia.com/api/v1/search?query=react");
+    const response = await axios.get(
+      "https://hn.algolia.com/api/v1/search?query=react"
+    );
     return response.data;
-  }
+  };
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
@@ -83,6 +86,18 @@ const SignUpHook = () => {
         {errors?.password && (
           <p className="text-red-500 text-sm">{errors.password.message}</p>
         )}
+        <div>
+          <input type="checkbox" {...register("showAge")} />
+          {watchShowAge && (
+            <input
+              type="number"
+              id="age"
+              placeholder="Enter your age"
+              className="p-4 rounded-md border border-gray-300"
+              {...register("age")}
+            />
+          )}
+        </div>
       </div>
 
       {/* Submit Button */}
