@@ -25,7 +25,8 @@ const SignUpHook = () => {
     register,
     handleSubmit,
     watch,
-    formState: { errors, isSubmitting, isValid, isDirty, dirtyFields },
+    reset,
+    formState: { errors, isSubmitting, isValid},
   } = useForm({
     resolver: yupResolver(schema),
     mode: "onChange", // optional: trigger validation on change
@@ -33,7 +34,15 @@ const SignUpHook = () => {
   const watchShowAge = watch("showAge", false);
   const onSubmit = async (values) => {
     if (isValid) {
-      console.log("send data to backend");
+      console.log("send data to backend",values);
+      //affter successfully submitted
+      //theem reset form
+      reset({
+        firstName:"",
+        lastName:"",
+        email:"",
+        password:""
+      });
     }
     const response = await axios.get(
       "https://hn.algolia.com/api/v1/search?query=react"
