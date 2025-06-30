@@ -2,21 +2,40 @@ import React from "react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
+
+// ✅ Validation Schema
 const schema = yup.object({
   firstName: yup
     .string()
-    .required("Please enter your firstName")
-    .max(10, "Must be charater 10 or less"),
+    .required("Please enter your first name")
+    .max(10, "Must be 10 characters or less"),
+  email: yup
+    .string()
+    .required("Please enter your email")
+    .email("Invalid email format"),
+  password: yup
+    .string()
+    .required("Please enter your password")
+    .min(6, "Password must be at least 6 characters"),
 });
+
 const SignUpHook = () => {
   const {
     register,
     handleSubmit,
-    formState: { errors },
-  } = useForm({ resolver: yupResolver(schema) });
+    formState: { errors, isSubmitting, isValid },
+  } = useForm({
+    resolver: yupResolver(schema),
+    mode: "onChange", // optional: trigger validation on change
+  });
 
   const onSubmit = (values) => {
-    console.log(values);
+    return new Promise((resolve) => {
+      setTimeout(() => {
+        console.log(values);
+        resolve();
+      }, 2000);
+    });
   };
 
   return (
@@ -26,45 +45,58 @@ const SignUpHook = () => {
       autoComplete="off"
     >
       <div className="flex flex-col gap-2">
-        <label htmlFor="firstName">Firstname</label>
+        {/* First Name */}
+        <label htmlFor="firstName">First Name</label>
         <input
           type="text"
           id="firstName"
           placeholder="Enter your first name"
-          className="p-4 rounded-md border border-gray-100"
+          className="p-4 rounded-md border border-gray-300"
           defaultValue="Vĩ"
           {...register("firstName")}
         />
         {errors?.firstName && (
-          <div className="text-red-500 text-sm">
-            {errors.firstName?.message}
-          </div>
+          <p className="text-red-500 text-sm">{errors.firstName.message}</p>
         )}
 
+        {/* Email */}
         <label htmlFor="email">Email</label>
         <input
           type="email"
           id="email"
           placeholder="Enter your email"
-          className="p-4 rounded-md border border-gray-100"
+          className="p-4 rounded-md border border-gray-300"
           {...register("email")}
         />
+        {errors?.email && (
+          <p className="text-red-500 text-sm">{errors.email.message}</p>
+        )}
 
+        {/* Password */}
         <label htmlFor="password">Password</label>
         <input
           type="password"
           id="password"
-          placeholder="Enter password"
-          className="p-4 rounded-md border border-gray-100"
+          placeholder="Enter your password"
+          className="p-4 rounded-md border border-gray-300"
           {...register("password")}
         />
+        {errors?.password && (
+          <p className="text-red-500 text-sm">{errors.password.message}</p>
+        )}
       </div>
 
+      {/* Submit Button */}
       <button
         type="submit"
-        className="w-full p-4 bg-blue-600 text-white font-semibold rounded-lg mt-4"
+        disabled={isSubmitting}
+        className="w-full p-4 bg-blue-600 text-white font-semibold rounded-lg mt-4 flex justify-center items-center"
       >
-        Submit
+        {isSubmitting ? (
+          <div className=" mx-auto w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+        ) : (
+          "Submit"
+        )}
       </button>
     </form>
   );
