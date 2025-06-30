@@ -1,4 +1,5 @@
 import "./App.css";
+import Formregisterfinal from "./components/form/Formregisterfinal";
 // import Toggle from "./components/state/Toggle";
 // import Counter from "./components/counter/Counter";
 // import Game from "./components/tictactoe/game";
@@ -36,7 +37,7 @@ function App() {
   return (
     <div>
       {/* <MovieSearchApp></MovieSearchApp> */}
-     <SignUpHook></SignUpHook>
+     <Formregisterfinal></Formregisterfinal>
     </div>
   );
 }

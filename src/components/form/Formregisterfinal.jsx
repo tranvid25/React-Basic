@@ -1,38 +1,35 @@
 import React, { useEffect } from "react";
-import { useForm, useController } from "react-hook-form";
+import { Controller, useController, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
-
-// ✅ Validation schema
+//validation Schema
 const schema = yup.object({
   firstName: yup
     .string()
     .required("Please enter your firstName")
-    .max(10, "Only enter 10 characters or less"),
+    .max(10, " Only enter 10 character or less"),
   lastName: yup
     .string()
-    .required("Please enter your lastName")
-    .max(10, "Only enter 10 characters or less"),
+    .required("Please enter yout lastName")
+    .max(10, "Only enter 10 character or less"),
   email: yup
     .string()
     .required("Please enter your email")
-    .email("Email is invalid"),
+    .email("email is invalid"),
   password: yup
     .string()
     .required("Please enter your password")
     .min(6, "Password must be at least 6 characters"),
   confirmPassword: yup
     .string()
-    .required("Please confirm your password")
-    .oneOf([yup.ref("password")], "Passwords must match"),
-  gender: yup.string().required("Please select your gender"),
-  country: yup.string().required("Please select your country"),
+    .required("Please Confirm password")
+    .oneOf([yup.ref("password")], "Password must match"),
+  radio: yup.string().required(),
   otherCountry: yup.string().when("country", {
     is: "other",
     then: (schema) => schema.required("Please enter your country"),
   }),
 });
-
 const Formregisterfinal = () => {
   const {
     register,
@@ -41,109 +38,87 @@ const Formregisterfinal = () => {
     setFocus,
     watch,
     reset,
-    formState: { errors, isSubmitting, isValid },
-  } = useForm({
-    resolver: yupResolver(schema),
-    mode: "onChange",
-  });
-
-  const watchCountry = watch("country");
-
+    formState: { errors, isSubmitting, isValid, defaultValues },
+  } = useForm({ resolver: yupResolver(schema), mode: "onChange" });
   const onSubmit = (values) => {
     if (isValid) {
       console.log(values);
     }
-
     reset({
       firstName: "",
       lastName: "",
       email: "",
       password: "",
       confirmPassword: "",
-      gender: "",
-      country: "",
-      otherCountry: "",
+      radio: "",
+      other: false,
     });
   };
-
   useEffect(() => {
     setFocus("firstName");
   }, [setFocus]);
-
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
       autoComplete="off"
-      className="p-10 w-full max-w-[500px] mx-auto border border-blue-300"
+      className="p-10 w-full max-w-[500px] mx-auto border border-blue-300 "
     >
-      <h2 className="text-center pb-5 font-semibold text-blue-500 text-2xl">
+      <h2 className="text-center pb-5 font-semibold text-blue-500 text-2xl ">
         Register
       </h2>
-
       <div className="flex flex-col gap-2">
-        <label htmlFor="firstName">First Name</label>
+        <label htmlFor="firstName">FirstName</label>
         <input
           type="text"
           id="firstName"
-          placeholder="Enter your first name"
-          {...register("firstName")}
+          placeholder="Please enter your firstName"
+          name="firstName"
           className="p-4 rounded-lg border border-gray-300"
         />
-        {errors.firstName && (
+        {errors?.firstName && (
           <p className="text-red-500 text-sm">{errors.firstName.message}</p>
         )}
-
-        <label htmlFor="lastName">Last Name</label>
+        <label htmlFor="firstName">LastName</label>
         <input
           type="text"
           id="lastName"
-          placeholder="Enter your last name"
-          {...register("lastName")}
+          placeholder="Please enter your lastName"
+          name="lastName"
           className="p-4 rounded-lg border border-gray-300"
         />
-        {errors.lastName && (
+        {errors?.lastName && (
           <p className="text-red-500 text-sm">{errors.lastName.message}</p>
         )}
-
-        <label htmlFor="email">Email</label>
+        <label htmlFor="firstName">email</label>
         <input
           type="text"
           id="email"
-          placeholder="Enter your email"
-          {...register("email")}
+          placeholder="Please enter your email"
+          name="email"
           className="p-4 rounded-lg border border-gray-300"
         />
-        {errors.email && (
+        {errors?.email && (
           <p className="text-red-500 text-sm">{errors.email.message}</p>
         )}
-
-        <label htmlFor="password">Password</label>
+        <label htmlFor="firstName">Password</label>
         <input
           type="password"
           id="password"
-          placeholder="Enter your password"
-          {...register("password")}
+          placeholder="Please enter your password"
+          name="password"
           className="p-4 rounded-lg border border-gray-300"
         />
-        {errors.password && (
+        {errors?.password && (
           <p className="text-red-500 text-sm">{errors.password.message}</p>
         )}
-
-        <label htmlFor="confirmPassword">Confirm Password</label>
+        <label htmlFor="firstName">Confirm Password</label>
         <input
           type="password"
-          id="confirmPassword"
-          placeholder="Confirm your password"
-          {...register("confirmPassword")}
+          id="Confirm_password"
+          placeholder="Please enter your Confirm_password"
+          name="Confirm_password"
           className="p-4 rounded-lg border border-gray-300"
         />
-        {errors.confirmPassword && (
-          <p className="text-red-500 text-sm">
-            {errors.confirmPassword.message}
-          </p>
-        )}
-
-        {/* Gender Radio */}
         <div>
           <p className="mb-2 font-medium">Gender:</p>
           <label className="mr-4">
@@ -162,8 +137,6 @@ const Formregisterfinal = () => {
             <p className="text-red-500 text-sm">{errors.gender.message}</p>
           )}
         </div>
-
-        {/* Country Select */}
         <div>
           <label htmlFor="country" className="block mb-2 font-medium">
             Country:
@@ -179,30 +152,8 @@ const Formregisterfinal = () => {
             <option value="jp">Japan</option>
             <option value="other">Other</option>
           </select>
-          {errors.country && (
-            <p className="text-red-500 text-sm">{errors.country.message}</p>
-          )}
         </div>
-
-        {/* If country === other => show input */}
-        {watchCountry === "other" && (
-          <div>
-            <label htmlFor="otherCountry">Other Country</label>
-            <MyInput
-              name="otherCountry"
-              control={control}
-              placeholder="Enter your country"
-            />
-            {errors.otherCountry && (
-              <p className="text-red-500 text-sm">
-                {errors.otherCountry.message}
-              </p>
-            )}
-          </div>
-        )}
       </div>
-
-      {/* Submit Button */}
       <button
         type="submit"
         disabled={isSubmitting}
@@ -217,8 +168,6 @@ const Formregisterfinal = () => {
     </form>
   );
 };
-
-// ✅ Custom Input
 const MyInput = ({ control, ...props }) => {
   const { field } = useController({
     control,
@@ -227,7 +176,7 @@ const MyInput = ({ control, ...props }) => {
   });
   return (
     <input
-      className="p-4 rounded-md border border-gray-300 w-full"
+      className="p-4 rounded-md border border-gray-300"
       {...field}
       {...props}
     />
