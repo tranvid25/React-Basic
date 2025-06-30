@@ -1,6 +1,6 @@
 import { Fragment, useState } from "react";
 import "./App.css";
-import Formregisterfinal from "./components/form/Formregisterfinal";
+// import Formregisterfinal from "./components/form/Formregisterfinal";
 // import Toggle from "./components/state/Toggle";
 // import Counter from "./components/counter/Counter";
 // import Game from "./components/tictactoe/game";
@@ -26,6 +26,7 @@ import Formregisterfinal from "./components/form/Formregisterfinal";
 // import SignUpv2 from "./components/form/SignUpv2";
 // import SignUpv2Final from "./components/form/SignUpv2Final";
 import SignUpHook from "./components/form/SignUpHook";
+import Modal from "./components/modal/Modal";
 // import { GlobalStyles } from "./GlobalStyles";
 // import { ThemeProvider } from "styled-components";
 // const theme = {
@@ -35,18 +36,23 @@ import SignUpHook from "./components/form/SignUpHook";
 // };
 
 function App() {
-  const firstName = "firstname";
-  const lastname = "lastName";
-  const [on, setOn] = useState(true);
+  const [showModal, setShowModal] = useState(false);
   return (
     <Fragment>
-      <div className="p-2 flex flex-row">
-        {on && (
-          <Fragment>
-            {firstName}
-            {lastname}
-          </Fragment>
-        )}
+      <div>
+        <Modal open={showModal} handleClose={() => setShowModal(false)}></Modal>
+      </div>
+      <button
+        className="p-4 text-white bg-blue-500 rounded-lg"
+        onClick={() => setShowModal(true)}
+      >
+        Show modal
+      </button>
+      <div className="relative z-30">
+        Lorem ipsum dolor, sit amet consectetur adipisicing elit. Eius nihil
+        autem omnis obcaecati corrupti sunt sapiente esse animi officia expedita
+        explicabo ipsam vitae, possimus impedit provident accusantium ab amet
+        excepturi!
       </div>
     </Fragment>
   );
