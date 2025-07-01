@@ -28,6 +28,7 @@ import "./App.css";
 import SignUpHook from "./components/form/SignUpHook";
 import Modal from "./components/modal/Modal";
 import Dropdown from "./components/Dropdown";
+import Tooltip from "./components/Tooltip";
 // import { GlobalStyles } from "./GlobalStyles";
 // import { ThemeProvider } from "styled-components";
 // const theme = {
@@ -40,7 +41,7 @@ function App() {
   const [showModal, setShowModal] = useState(false);
   return (
     <Fragment>
-      <div>
+      {/* <div>
         <Modal open={showModal} handleClose={() => setShowModal(false)}></Modal>
       </div>
       <button
@@ -57,6 +58,9 @@ function App() {
       </div>
       <div className="overflow-hidden">
         <Dropdown></Dropdown>
+      </div> */}
+      <div className="p-20">
+        <Tooltip text="Hover me">this is a tooltip</Tooltip>
       </div>
     </Fragment>
   );
