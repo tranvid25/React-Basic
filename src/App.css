@@ -61,3 +61,11 @@ body {
   object-fit: cover;
   flex-shrink: 0;
 }
+.dark{
+  color: #fff;
+  background-color: #333;
+}
+.light{
+  color: blue;
+  background-color: #fff;
+}
