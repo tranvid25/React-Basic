@@ -29,6 +29,18 @@ import SignUpHook from "./components/form/SignUpHook";
 import Modal from "./components/modal/Modal";
 import Dropdown from "./components/Dropdown";
 import Tooltip from "./components/Tooltip";
+import { ErrorBoundary } from "react-error-boundary";
+
+function fallbackRender({ error, resetErrorBoundary }) {
+  // Call resetErrorBoundary() to reset the error boundary and retry the render.
+
+  return (
+    <div role="alert">
+      <p>KHÔNG THỂ  lấy data do component đang lỗi</p>
+      <pre style={{ color: "red" }}>{error.message}</pre>
+    </div>
+  );
+}
 // import { GlobalStyles } from "./GlobalStyles";
 // import { ThemeProvider } from "styled-components";
 // const theme = {
@@ -38,7 +50,6 @@ import Tooltip from "./components/Tooltip";
 // };
 
 function App() {
-  const [showModal, setShowModal] = useState(false);
   return (
     <Fragment>
       {/* <div>
@@ -59,9 +70,14 @@ function App() {
       <div className="overflow-hidden">
         <Dropdown></Dropdown>
       </div> */}
-      <div className="p-20">
+      <ErrorBoundary
+        fallbackRender={fallbackRender}
+      >
+       <div className="p-20">
         <Tooltip text="Hover me">this is a tooltip</Tooltip>
       </div>
+      </ErrorBoundary>
+      ;
     </Fragment>
   );
 }

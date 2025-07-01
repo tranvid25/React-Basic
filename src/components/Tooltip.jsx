@@ -22,9 +22,9 @@ const Tooltip = ({ children, text }) => {
 };
 function TooltipContent({children,coor}) {
   return ReactDOM.createPortal(
-    <p className="absolute inline-block p-4 text-white -translate-y-full bg-black rounded-lg" style={{
-        top:coor.top-coor.height/2,
-        left:coor.left
+    <p className="absolute inline-block p-4 text-white -translate-y-full bg-black rounded-lg max-w-[200px] -translate-x-2/4" style={{
+        top:coor.top-coor.height/2 + window.scrollY,
+        left:coor.left+coor.width/2
     }}>
       {children}
     </p>,
