@@ -27,6 +27,7 @@ import "./App.css";
 // import SignUpv2Final from "./components/form/SignUpv2Final";
 import SignUpHook from "./components/form/SignUpHook";
 import Modal from "./components/modal/Modal";
+import Dropdown from "./components/Dropdown";
 // import { GlobalStyles } from "./GlobalStyles";
 // import { ThemeProvider } from "styled-components";
 // const theme = {
@@ -53,6 +54,9 @@ function App() {
         autem omnis obcaecati corrupti sunt sapiente esse animi officia expedita
         explicabo ipsam vitae, possimus impedit provident accusantium ab amet
         excepturi!
+      </div>
+      <div className="overflow-hidden">
+        <Dropdown></Dropdown>
       </div>
     </Fragment>
   );
