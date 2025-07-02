@@ -1,5 +1,5 @@
 import React from 'react';
-import { ThemeContext } from '../App'
+import { ThemeContext } from '../ThemeContext';
 import { useContext } from 'react';
 const Paragraph = () => {
     const theme=useContext(ThemeContext)

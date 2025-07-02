@@ -1,23 +1,17 @@
-import React, { useState, createContext } from 'react';
-import Content from './components/Content';
-import './App.css'
-
-export const ThemeContext = createContext();
+import Content from "./components/Content";
+import "./App.css";
+import { ThemeProvider } from "styled-components";
+import { Fragment } from "react";
+import HeaderMain from "./components/HeaderMain";
+import { AuthProvider } from "./contexts/auth-context";
 
 function App() {
-  const [theme, setTheme] = useState("dark");
-
-  const toggleTheme = () => {
-    setTheme(theme === "dark" ? "light" : "dark");
-  };
-
   return (
-    <ThemeContext.Provider value={theme}>
-      <div style={{ padding: 20 }}>
-        <button onClick={toggleTheme}>Toggle theme</button>
-        <Content />
-      </div>
-    </ThemeContext.Provider>
+    <Fragment>
+      <AuthProvider>
+        <HeaderMain></HeaderMain>
+      </AuthProvider>
+    </Fragment>
   );
 }
 
